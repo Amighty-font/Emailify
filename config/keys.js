@@ -6,9 +6,3 @@ if (process.env.NODE_ENV === 'production') {
     //in dev
     module.exports = require('./dev');
 }
-
-var emailify = {
-    username: 'emailify-prod',
-    password: 'HBdiA75:rk3cACN',
-    connectLink: 'mongodb+srv://emailify-prod:<password>@cluster0.x4rib.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-}
