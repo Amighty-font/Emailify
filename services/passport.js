@@ -21,7 +21,8 @@ passport.use(
         {
             clientID: keys.googleClientID,
             clientSecret: keys.googleClientSecret,
-            callbackURL: '/auth/google/callback'
+            callbackURL: '/auth/google/callback',
+            proxy: true //heroku has a proxy and google will see it and change to http instead of https if proxy == false
         },
     //callback event
         (accessToken, refreshToken, profile, done) => {
