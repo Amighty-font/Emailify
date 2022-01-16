@@ -25,17 +25,16 @@ passport.use(
             proxy: true //heroku has a proxy and google will see it and change to http instead of https if proxy == false
         },
     //callback event
-        (accessToken, refreshToken, profile, done) => {
-            User.findOne({ googleId: profile.id }).then(existingUser => {
-                if (existingUser){
-                    //found existing user
-                    done(null, existingUser);  //null = nothing went wrong, and tells mongo that we found existingUser
-                } else {
-                    //user has not been created
-                    new User({ googleId: profile.id }).save() //takes the model and save to the database
-                        .then(user => done(null, user));
-                }
-            });
+        async (accessToken, refreshToken, profile, done) => {
+            const existingUser = await User.findOne({ googleId: profile.id })
+            if (existingUser){
+                //found existing user
+                done(null, existingUser);  //null = nothing went wrong, and tells mongo that we found existingUser
+            } else {
+                //user has not been created
+                const user = await new User({ googleId: profile.id }).save() //takes the model and save to the database
+                done(null, user);
+            }
         }
     )
-); 
+) 
