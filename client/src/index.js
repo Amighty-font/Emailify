@@ -8,6 +8,9 @@ import reduxThunk from 'redux-thunk';
 import App from './components/App';
 import reducers from './reducers';
 
+//dev only for axios test
+import axios from 'axios';
+window.axios = axios;
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk)); 
 //provider tag is a redux component that can read changes in the redux store. any time redux store gets new state, it'll update all child components with new states
